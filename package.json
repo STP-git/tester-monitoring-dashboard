@@ -5,7 +5,10 @@
   "main": "server/app.js",
   "scripts": {
     "start": "node server/app.js",
+    "start:bun": "bun server/app.js",
     "dev": "nodemon server/app.js",
+    "dev:bun": "bun --watch server/app.js",
+    "install:bun": "bun install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

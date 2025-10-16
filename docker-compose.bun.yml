@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  tester-monitoring-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.bun
+      args:
+        - HTTP_PROXY=${HTTP_PROXY}
+        - HTTPS_PROXY=${HTTPS_PROXY}
+        - NO_PROXY=${NO_PROXY}
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - HTTP_PROXY=${HTTP_PROXY}
+      - HTTPS_PROXY=${HTTPS_PROXY}
+      - NO_PROXY=${NO_PROXY}
+    restart: unless-stopped
+    volumes:
+      - ./public/config.json:/app/public/config.json
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "bun", "-e", "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - monitoring-network
+
+networks:
+  monitoring-network:
+    driver: bridge
+
+volumes:
+  logs:

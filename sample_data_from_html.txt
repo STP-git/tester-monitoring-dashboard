@@ -1,0 +1,1259 @@
+    <div class="container">
+        <div class="row mb-3 justify-content-between align-items-center">
+            <div class="col-3 p-0">
+                <button class="btn btn-sm btn-dark fs-6 fw-bold">ESS08</button>
+            </div>
+            <div id="teststatusdiv" class="col-md-5">
+                <div class="d-inline-block" tabindex="0">
+		            <span class="text-muted" style="font-size: 0.8rem;">Testing</span>
+                    <span id="testing-counter" class="lbstatus testing me-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" data-bs-content="Testing Status">0</span>
+		            <span class="text-muted" style="font-size: 0.8rem;">Failing</span>
+                    <span id="failing-counter" class="lbstatus failing me-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" data-bs-content="Failing Status">0</span>
+		            <span class="text-muted" style="font-size: 0.8rem;">Aborted</span>
+                    <span id="aborted-counter" class="lbstatus aborted me-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" data-bs-content="Aborted Status">0</span>
+		            <span class="text-muted" style="font-size: 0.8rem;">Failed</span>
+                    <span id="failed-counter" class="lbstatus failed me-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" data-bs-content="Failed Status">0</span>
+		            <span class="text-muted" style="font-size: 0.8rem;">Passed</span>
+                    <span id="passed-counter" class="lbstatus passed me-2" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-placement="top" data-bs-content="Passed Status">0</span>
+                </div>
+            </div>
+            <div class="col-4 p-0 text-end">
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#batchModal">SCAN-IN</button>
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#checkoutbatch">DELIVERY-OUT</button>
+                <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#abortbatch">ABORT</button>
+            </div>
+        </div>
+
+        <div id="uutList" class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 testing px-0" id="slot-1">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="/status/1/SLOT01">SLOT01</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn">SFT</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus">testing</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime">0:46:43</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-10 col-sm-10">
+                                <span class="slot-sn">
+                                    <a href="/status/SLOT01">
+                                        332404254207412
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT01_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT01_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT01_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT01_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">Production</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">AZ3324_2025.10.08-01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 testing px-0" id="slot-2">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="/status/2/SLOT02">SLOT02</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn">SFT</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus">testing</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime">0:46:43</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-10 col-sm-10">
+                                <span class="slot-sn">
+                                    <a href="/status/SLOT02">
+                                        332404254207385
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT02_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT02_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT02_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT02_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">Production</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">AZ3324_2025.10.08-01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 testing px-0" id="slot-3">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="/status/3/SLOT03">SLOT03</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn">SFT</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus">testing</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime">0:46:43</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-10 col-sm-10">
+                                <span class="slot-sn">
+                                    <a href="/status/SLOT03">
+                                        332404254207377
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT03_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT03_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT03_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT03_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">Production</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">AZ3324_2025.10.08-01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-4">
+                <div class="panel " >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT04</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT04_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT04_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT04_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT04_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-5">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT05</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT05</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT05_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT05_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT05_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT05_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 testing px-0" id="slot-6">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="/status/6/SLOT06">SLOT06</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn">SFT</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus">testing</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime">0:46:43</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-10 col-sm-10">
+                                <span class="slot-sn">
+                                    <a href="/status/SLOT06">
+                                        332404254207433
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT06_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT06_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT06_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT06_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">Production</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">AZ3324_2025.10.08-01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 testing px-0" id="slot-7">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="/status/7/SLOT07">SLOT07</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn">SFT</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus">testing</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime">0:46:43</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-10 col-sm-10">
+                                <span class="slot-sn">
+                                    <a href="/status/SLOT07">
+                                        332404254207384
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT07_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT07_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT07_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT07_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">Production</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">AZ3324_2025.10.08-01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 testing px-0" id="slot-8">
+                <div class="panel " >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="/status/8/SLOT08">SLOT08</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn">SFT</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus">testing</span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime">0:46:43</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-10 col-sm-10">
+                                <span class="slot-sn">
+                                    <a href="/status/SLOT08">
+                                        332404254207378
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="col-md-2 col-sm-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT08_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT08_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT08_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT08_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">Production</span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold">AZ3324_2025.10.08-01</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-9">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT09</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT09</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT09_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT09_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT09_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT09_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-10">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT10</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT10</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT10_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT10_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT10_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT10_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-11">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT11</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT11</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT11_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT11_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT11_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT11_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-12">
+                <div class="panel " >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT12</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT12</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT12_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT12_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT12_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT12_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-13">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT13</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT13</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT13_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT13_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT13_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT13_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-14">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT14</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT14</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT14_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT14_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT14_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT14_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-15">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT15</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT15</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT15_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT15_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT15_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT15_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-16">
+                <div class="panel " >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-right">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">SLOT16</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT16</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT16_01</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT16_02</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT16_03</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-12 col-sm-12">
+                                <span class="slot-sn"><a href="javascript:void(0);" style="color: #AAA;">SLOT16_04</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 default px-0" id="slot-17">
+                <div class="panel leftpanel" >
+                    <div class="panel-heading">
+                        <div class="row align-items-center">
+                            <div class="col-md-8 ps-3 text-start">
+                                <div class="col-sm-12">
+                                    <span class="chassisname">
+                                        <a href="javascript:void(0);">CHAMBER01</a>
+                                    </span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="slot-sn"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 pe-3 text-end">
+                                <div class="col-sm-12">
+                                    <span class="chassisstatus"></span>
+                                </div>
+                                <div class="col-sm-12">
+                                    <span class="testtime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-sm-10">
+                                <span class="slot-sn"></span>
+                            </div>
+                            <div class="col-sm-2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn">
+                                    <span class="fw-bold"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row align-items-center">
+                            <div class="col-sm-12">
+                                <span class="slot-sn fw-bold"></span>
+                            </div>
+                            <div class="col-sm-12">
+                                <span class="slot-sn"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

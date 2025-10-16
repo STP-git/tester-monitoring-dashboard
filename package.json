@@ -1,0 +1,28 @@
+{
+  "name": "tester-monitoring-dashboard",
+  "version": "1.0.0",
+  "description": "Lightweight dashboard for monitoring test equipment with multiple slots",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "dev": "nodemon server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "monitoring",
+    "dashboard",
+    "tester",
+    "scraping"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.5.0",
+    "cheerio": "^1.0.0-rc.12",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

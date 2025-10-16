@@ -1,0 +1,194 @@
+<div class="card">
+                    <div class="card-body">
+                      <h6 class="text-center" id="CS8210_ESS07_header_name">CS8210_ESS07</h6>
+                      <div class="row p-0 justify-content-between" id="CS8210_ESS07_add_table"><div class="col-4 p-0" id="CS8210_ESS07_monitor_table1">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Slot Name</th>
+                    </tr>
+                  </thead>
+                  <tbody id="CS8210_ESS07_data1">
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT01
+                                <br>
+                                2:28:50
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT02
+                                <br>
+                                2:28:50
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT03
+                                <br>
+                                2:28:51
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT04
+                                <br>
+                                2:28:51
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT05
+                                <br>
+                                2:28:50
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a class="btn btn-failing rounded-pill text-dark fw-bold" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT06
+                                <br>
+                                2:28:50
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT07
+                                <br>
+                                2:28:38
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT08
+                                <br>
+                                2:28:37
+                            </a>
+                        </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div><div class="col-4 p-0" id="CS8210_ESS07_monitor_table2">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Slot Name</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CS8210_ESS07_data2">
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT09
+                                <br>
+                                2:28:37
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT10
+                                <br>
+                                2:28:37
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT11
+                                <br>
+                                2:28:37
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT12
+                                <br>
+                                2:28:37
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT13
+                                <br>
+                                2:28:25
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT14
+                                <br>
+                                2:28:24
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT15
+                                <br>
+                                2:28:24
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a class="btn btn-secondary rounded-pill fw-bold" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                SLOT16
+                                <br>
+                                Available
+                            </a>
+                        </td>
+                    </tr>
+                  
+                    <tr>
+                        <td class="text-center">
+                            <a undefined="" style="font-size: 8px" href="http://192.168.140.102:8080" target="_blank">
+                                CHAMBER01
+                                <br>
+                                2:29:03
+                            </a>
+                        </td>
+                    </tr>
+                  </tbody>
+                  </table>
+                </div><div class="col-4 p-0" id="CS8210_ESS07_monitor_table3"></div></div>
+                    </div>
+                  </div>

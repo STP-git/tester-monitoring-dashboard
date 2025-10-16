@@ -1,0 +1,18 @@
+{
+  "testers": [
+    {
+      "id": "ess08",
+      "name": "ESS08",
+      "url": "http://192.168.140.103:8080",
+      "enabled": true,
+      "selectors": {
+        "testerName": ".btn.btn-dark.fs-6",
+        "statusCounters": "#teststatusdiv",
+        "slotsContainer": "#uutList"
+      }
+    }
+  ],
+  "refreshInterval": 60000,
+  "maxRetries": 3,
+  "timeout": 10000
+}

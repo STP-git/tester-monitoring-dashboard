@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tester Monitoring Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Tester Monitoring Dashboard</h1>
+            <div class="header-controls">
+                <button id="config-btn" class="btn btn-primary">Configuration</button>
+                <div class="status-indicator">
+                    <span id="connection-status">Connected</span>
+                    <span id="last-update">Never</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Tester Selection Section -->
+            <section class="tester-selection">
+                <h2>Select Testers to Monitor</h2>
+                <div class="tester-checkboxes" id="tester-checkboxes">
+                    <!-- Checkboxes will be populated here -->
+                </div>
+                <div class="selection-controls">
+                    <button id="select-all" class="btn btn-secondary">Select All</button>
+                    <button id="deselect-all" class="btn btn-secondary">Deselect All</button>
+                    <button id="query-btn" class="btn btn-success">Start Monitoring</button>
+                </div>
+            </section>
+
+            <!-- Tester Cards Grid -->
+            <section class="tester-dashboard" id="tester-dashboard">
+                <!-- Tester cards will be displayed here -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Configuration Modal -->
+    <div id="config-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tester Configuration</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="config-controls">
+                    <button id="add-tester" class="btn btn-primary">Add Tester</button>
+                    <button id="import-config" class="btn btn-secondary">Import Config</button>
+                    <button id="export-config" class="btn btn-secondary">Export Config</button>
+                </div>
+                <table class="config-table">
+                    <thead>
+                        <tr>
+                            <th>Display Name</th>
+                            <th>URL</th>
+                            <th>Enabled</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="config-table-body">
+                        <!-- Configuration rows will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Tester Modal -->
+    <div id="tester-form-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tester-form-title">Add Tester</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="tester-form">
+                    <div class="form-group">
+                        <label for="tester-id">ID:</label>
+                        <input type="text" id="tester-id" required>
+                        <small>Unique identifier (e.g., ess08)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="tester-name">Display Name:</label>
+                        <input type="text" id="tester-name" required>
+                        <small>Name shown on the dashboard (e.g., ESS08)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="tester-url">URL:</label>
+                        <input type="url" id="tester-url" required>
+                        <small>Full URL to the tester interface (e.g., http://192.168.140.103:8080)</small>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="tester-enabled" checked>
+                            Enabled
+                        </label>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" id="cancel-form">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Templates for dynamic content -->
+    
+    <!-- Template for enhanced tester card -->
+    <template id="enhanced-tester-card-template">
+        <div class="tester-card" data-tester-id="">
+            <div class="card-header">
+                <h3 class="tester-name"></h3>
+                <button class="url-btn" title="Open Tester URL">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15,3 21,3 21,9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </button>
+                <div class="tester-status">
+                    <span class="status-indicator"></span>
+                    <span class="last-update"></span>
+                </div>
+            </div>
+            
+            <!-- Status Counters -->
+            <div class="status-counters">
+                <div class="counter">
+                    <span class="counter-label">Testing</span>
+                    <span class="counter-value testing">0</span>
+                </div>
+                <div class="counter">
+                    <span class="counter-label">Failing</span>
+                    <span class="counter-value failing">0</span>
+                </div>
+                <div class="counter">
+                    <span class="counter-label">Passed</span>
+                    <span class="counter-value passed">0</span>
+                </div>
+                <div class="counter">
+                    <span class="counter-label">Failed</span>
+                    <span class="counter-value failed">0</span>
+                </div>
+                <div class="counter">
+                    <span class="counter-label">Aborted</span>
+                    <span class="counter-value aborted">0</span>
+                </div>
+            </div>
+            
+            <div class="card-body">
+                <div class="slots-container">
+                    <!-- Slots will be populated here -->
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Template for enhanced slot -->
+    <template id="enhanced-slot-template">
+        <div class="slot" data-slot-id="">
+            <div class="slot-header">
+                <div class="slot-name"></div>
+                <div class="slot-status"></div>
+                <div class="slot-time"></div>
+            </div>
+            <div class="slot-details">
+                <div class="serial-number">
+                    <span class="label">SN:</span>
+                    <span class="value"></span>
+                </div>
+                <div class="sub-slots">
+                    <div class="sub-slot-grid">
+                        <!-- Sub-slots will be populated here -->
+                    </div>
+                </div>
+                <div class="production-info">
+                    <div class="info-row">
+                        <span class="label">Type:</span>
+                        <span class="value production-type"></span>
+                    </div>
+                    <div class="info-row">
+                        <span class="label">Version:</span>
+                        <span class="value software-version"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Loading indicator -->
+    <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Loading data...</p>
+    </div>
+
+    <!-- Error message container -->
+    <div id="error-container" class="error-container" style="display: none;">
+        <div class="error-message">
+            <h3>Error</h3>
+            <p id="error-text"></p>
+            <button class="btn btn-primary" id="dismiss-error">Dismiss</button>
+        </div>
+    </div>
+
+    <script src="js/enhanced-tester-dashboard.js"></script>
+</body>
+</html>

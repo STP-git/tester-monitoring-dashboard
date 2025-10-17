@@ -70,7 +70,7 @@ class PythonScraperWrapper {
             name: slot.name || slot.slot_name,
             status: slot.status,
             testTime: slot.test_time,
-            serialNumber: slot.sn,
+            serialNumber: slot.sn || slot.serial_number,
             subSlots: slot.subSlots || [],
             productionInfo: slot.productionInfo || 'N/A',
             softwareVersion: slot.softwareVersion || 'N/A'

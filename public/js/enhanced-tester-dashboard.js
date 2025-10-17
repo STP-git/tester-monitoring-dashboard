@@ -295,7 +295,16 @@ class EnhancedTesterDashboard {
         clone.querySelector('.slot-status').className = `slot-status ${slot.status}`;
         clone.querySelector('.slot-time').textContent = slot.testTime;
         
-        clone.querySelector('.serial-number .value').textContent = slot.serialNumber;
+        // Debug logging for serial number
+        console.log(`[Frontend] Creating slot element for ${slot.name}:`, {
+            serialNumber: slot.serialNumber,
+            sn: slot.sn,
+            fullSlot: slot
+        });
+        
+        // Try multiple possible field names for serial number
+        const serialNumber = slot.serialNumber || slot.sn || 'N/A';
+        clone.querySelector('.serial-number .value').textContent = serialNumber;
         
         // Add sub-slots
         const subSlotGrid = clone.querySelector('.sub-slot-grid');

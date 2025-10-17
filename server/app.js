@@ -56,6 +56,15 @@ app.get('/api/tester/:testerId', async (req, res) => {
         }
         
         const data = await enhancedScraper.scrapeTesterData(tester);
+        
+        // Debug logging for serial numbers
+        if (data.slots && data.slots.length > 0) {
+            console.log(`[Backend] Sending data for ${tester.name}:`);
+            data.slots.forEach((slot, index) => {
+                console.log(`  Slot ${index + 1} (${slot.name}): SN="${slot.serialNumber}" Status=${slot.status}`);
+            });
+        }
+        
         res.json(data);
     } catch (error) {
         console.error(`Error fetching data for tester ${req.params.testerId}:`, error);
@@ -96,6 +105,17 @@ app.post('/api/testers/batch', async (req, res) => {
                 }
             }
         }
+        
+        // Debug logging for batch request
+        console.log(`[Backend] Sending batch data for ${results.length} testers`);
+        results.forEach(testerData => {
+            if (testerData.slots && testerData.slots.length > 0) {
+                console.log(`  ${testerData.name}:`);
+                testerData.slots.forEach((slot, index) => {
+                    console.log(`    Slot ${index + 1} (${slot.name}): SN="${slot.serialNumber}" Status=${slot.status}`);
+                });
+            }
+        });
         
         res.json(results);
     } catch (error) {

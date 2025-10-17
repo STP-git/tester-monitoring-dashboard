@@ -223,6 +223,26 @@ app.get('/api/scheduler/status', (req, res) => {
     }
 });
 
+// API endpoint to run scraper diagnostic
+app.post('/api/diagnostic', async (req, res) => {
+    try {
+        const { testerId } = req.body;
+        const diagnostic = require('./scraper-diagnostic');
+        
+        let result;
+        if (testerId) {
+            result = await diagnostic.runDiagnostic(testerId);
+        } else {
+            result = await diagnostic.runDiagnosticForAllTesters();
+        }
+        
+        res.json(result);
+    } catch (error) {
+        console.error('Error running diagnostic:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
     res.json({

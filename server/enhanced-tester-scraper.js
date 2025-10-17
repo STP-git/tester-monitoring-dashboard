@@ -1,10 +1,12 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const pythonScraper = require('./python-scraper-wrapper');
 
 class EnhancedTesterScraper {
     constructor() {
         this.cache = new Map();
         this.cacheTimeout = 30000; // 30 seconds
+        this.usePythonFallback = false; // Set to true to use Python as fallback
     }
 
     async scrapeTesterData(testerConfig) {
@@ -17,27 +19,29 @@ class EnhancedTesterScraper {
         }
 
         try {
-            const response = await axios.get(testerConfig.url, {
-                timeout: 10000,
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-                }
-            });
-
-            const $ = cheerio.load(response.data);
+            let data;
             
-            const data = {
-                id: testerConfig.id,
-                name: testerConfig.name,
-                url: testerConfig.url,
-                timestamp: new Date().toISOString(),
-                status: 'success',
-                // Extract all data according to the guide
-                pageData: this.extractPageData($),
-                counters: this.extractStatusCounters($),
-                slots: this.extractSlots($),
-                units: this.extractUnits($)
-            };
+            // Try JavaScript scraper first
+            try {
+                data = await this.scrapeWithJavaScript(testerConfig);
+                console.log(`[JS Scraper] Successfully scraped ${testerConfig.name} with JavaScript`);
+            } catch (jsError) {
+                console.error(`[JS Scraper] JavaScript scraping failed for ${testerConfig.name}:`, jsError.message);
+                
+                // If Python fallback is enabled, try Python scraper
+                if (this.usePythonFallback) {
+                    console.log(`[JS Scraper] Falling back to Python scraper for ${testerConfig.name}`);
+                    try {
+                        data = await pythonScraper.scrapeTesterData(testerConfig);
+                        console.log(`[JS Scraper] Python fallback succeeded for ${testerConfig.name}`);
+                    } catch (pythonError) {
+                        console.error(`[JS Scraper] Python fallback also failed for ${testerConfig.name}:`, pythonError.message);
+                        throw new Error(`Both JavaScript and Python scrapers failed. JS: ${jsError.message}, Python: ${pythonError.message}`);
+                    }
+                } else {
+                    throw jsError;
+                }
+            }
 
             // Cache the result
             this.cache.set(cacheKey, {
@@ -68,6 +72,36 @@ class EnhancedTesterScraper {
 
             return errorData;
         }
+    }
+    
+    async scrapeWithJavaScript(testerConfig) {
+        const response = await axios.get(testerConfig.url, {
+            timeout: 10000,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+        });
+
+        const $ = cheerio.load(response.data);
+        
+        return {
+            id: testerConfig.id,
+            name: testerConfig.name,
+            url: testerConfig.url,
+            timestamp: new Date().toISOString(),
+            status: 'success',
+            // Extract all data according to the guide
+            pageData: this.extractPageData($),
+            counters: this.extractStatusCounters($),
+            slots: this.extractSlots($),
+            units: this.extractUnits($)
+        };
+    }
+    
+    // Method to toggle Python fallback
+    setPythonFallback(enabled) {
+        this.usePythonFallback = enabled;
+        console.log(`[Scraper] Python fallback ${enabled ? 'enabled' : 'disabled'}`);
     }
 
     extractPageData($) {

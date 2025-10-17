@@ -32,8 +32,11 @@ class EnhancedTesterScraper {
                 url: testerConfig.url,
                 timestamp: new Date().toISOString(),
                 status: 'success',
+                // Extract all data according to the guide
+                pageData: this.extractPageData($),
                 counters: this.extractStatusCounters($),
-                slots: this.extractSlots($)
+                slots: this.extractSlots($),
+                units: this.extractUnits($)
             };
 
             // Cache the result
@@ -52,7 +55,9 @@ class EnhancedTesterScraper {
                 status: 'error',
                 error: error.message,
                 counters: {},
-                slots: []
+                slots: [],
+                units: [],
+                pageData: {}
             };
 
             // Cache error result for shorter time
@@ -63,6 +68,57 @@ class EnhancedTesterScraper {
 
             return errorData;
         }
+    }
+
+    extractPageData($) {
+        const pageData = {};
+        
+        try {
+            // Extract page title
+            pageData.title = $('title').text().trim();
+            
+            // Extract station name from button
+            pageData.stationName = $('div.container > div.row > div.col-3 > button').text().trim();
+            
+            // Extract configuration variables from script tag
+            pageData.config = {};
+            const scripts = $('script').filter((i, el) => {
+                const scriptText = $(el).html();
+                return scriptText && (scriptText.includes('max_slots') || scriptText.includes('test_station'));
+            });
+            
+            if (scripts.length > 0) {
+                const scriptText = $(scripts[0]).html();
+                
+                // Extract common configuration variables
+                const configVars = [
+                    'max_slots', 'test_station', 'interval', 'station_id',
+                    'station_type', 'location', 'version', 'build_date'
+                ];
+                
+                configVars.forEach(varName => {
+                    const regex = new RegExp(`(?:const|var|let)\\s+${varName}\\s*=\\s*['"]([^'"]+)['"]`);
+                    const match = scriptText.match(regex);
+                    if (match) {
+                        pageData.config[varName] = match[1];
+                    }
+                });
+                
+                // Try to extract numeric values
+                const numericVars = ['max_slots', 'interval'];
+                numericVars.forEach(varName => {
+                    const regex = new RegExp(`(?:const|var|let)\\s+${varName}\\s*=\\s*(\\d+)`);
+                    const match = scriptText.match(regex);
+                    if (match) {
+                        pageData.config[varName] = parseInt(match[1]);
+                    }
+                });
+            }
+        } catch (error) {
+            console.error('Error extracting page data:', error);
+        }
+        
+        return pageData;
     }
 
     extractStatusCounters($) {
@@ -120,7 +176,7 @@ class EnhancedTesterScraper {
                 let slotName = '';
                 $slot.find('.chassisname a').each((i, el) => {
                     const text = $(el).text().trim();
-                    if (text && text.startsWith('SLOT')) {
+                    if (text) {
                         slotName = text;
                         return false; // break the loop
                     }
@@ -135,18 +191,24 @@ class EnhancedTesterScraper {
                     }
                 }
                 
-                // Extract slot status from CSS classes
+                // Extract slot status from CSS classes (improved detection)
                 let slotStatus = 'available';
-                if ($slot.hasClass('testing')) {
-                    slotStatus = 'testing';
-                } else if ($slot.hasClass('failing')) {
-                    slotStatus = 'failing';
-                } else if ($slot.hasClass('aborted')) {
-                    slotStatus = 'aborted';
-                } else if ($slot.hasClass('failed')) {
-                    slotStatus = 'failed';
-                } else if ($slot.hasClass('passed')) {
-                    slotStatus = 'passed';
+                
+                // Check for status classes in order of priority
+                const statusClasses = ['testing', 'failing', 'aborted', 'failed', 'passed', 'default'];
+                for (const status of statusClasses) {
+                    if ($slot.hasClass(status)) {
+                        slotStatus = status;
+                        break;
+                    }
+                }
+                
+                // Also try to extract status from the chassisstatus element
+                if (slotStatus === 'available') {
+                    const chassisStatus = $slot.find('.chassisstatus').text().trim();
+                    if (chassisStatus) {
+                        slotStatus = chassisStatus.toLowerCase();
+                    }
                 }
                 
                 // Extract test time
@@ -164,27 +226,36 @@ class EnhancedTesterScraper {
                 $slot.find('.panel-body').first().find('.slot-sn a').each((i, el) => {
                     const sn = $(el).text().trim();
                     // Check if it looks like a serial number (numeric and longer than 6 digits)
-                    if (sn && /^\d{7,}$/.test(sn)) {
-                        serialNumber = sn;
-                        return false; // break the loop
+                    // Also handle serial numbers that might contain letters
+                    if (sn && (sn.length >= 7 || (sn.length >= 6 && /\d/.test(sn)))) {
+                        // Exclude slot names like SLOT01, SLOT01_01
+                        if (!sn.match(/^SLOT\d+(_\d+)?$/)) {
+                            serialNumber = sn;
+                            return false; // break the loop
+                        }
                     }
                 });
                 
-                // Extract sub-slots
+                // Extract sub-slots (improved)
                 const subSlots = [];
                 $slot.find('.panel-body').each((i, panelElement) => {
                     const $panel = $(panelElement);
                     $panel.find('.slot-sn a').each((j, el) => {
                         const subSlotName = $(el).text().trim();
-                        const subSlotColor = $(el).css('color');
+                        const subSlotStyle = $(el).attr('style') || '';
                         
                         // Only include sub-slots that have proper names
                         if (subSlotName && (subSlotName.includes('_') || subSlotName.startsWith('SLOT'))) {
-                            const subSlotStatus = subSlotColor === 'rgb(170, 170, 170)' || 
-                                                  subSlotColor === '#aaa' ? 'inactive' : 'active';
+                            // Determine status from inline style color
+                            let subSlotStatus = 'active';
+                            if (subSlotStyle.includes('#AAA') || subSlotStyle.includes('#aaa') ||
+                                subSlotStyle.includes('rgb(170, 170, 170)')) {
+                                subSlotStatus = 'inactive';
+                            }
                             
-                            // Avoid duplicates
-                            if (!subSlots.find(sub => sub.name === subSlotName)) {
+                            // Avoid duplicates and the main serial number
+                            if (!subSlots.find(sub => sub.name === subSlotName) &&
+                                subSlotName !== serialNumber) {
                                 subSlots.push({
                                     name: subSlotName,
                                     status: subSlotStatus
@@ -232,6 +303,51 @@ class EnhancedTesterScraper {
         }
         
         return slots;
+    }
+
+    extractUnits($) {
+        const units = [];
+        
+        try {
+            // Extract comprehensive unit data from checkoutbatch modal
+            $('#checkoutbatch form[id^="message-add-"]').each((index, formElement) => {
+                const $form = $(formElement);
+                const unit = {};
+                
+                // Extract all hidden input fields
+                $form.find('input[type="hidden"]').each((i, inputElement) => {
+                    const $input = $(inputElement);
+                    const name = $input.attr('name');
+                    const value = $input.val();
+                    
+                    if (name && value) {
+                        unit[name] = value;
+                    }
+                });
+                
+                // Only add unit if we have essential data
+                if (unit.serial_number || unit.product_name) {
+                    // Add form ID as reference
+                    unit.formId = $form.attr('id');
+                    
+                    // Parse numeric values
+                    if (unit.slot_no) {
+                        unit.slot_no = parseInt(unit.slot_no);
+                    }
+                    
+                    // Add parsed timestamp if available
+                    if (unit.timestamp) {
+                        unit.parsedTimestamp = new Date(unit.timestamp).toISOString();
+                    }
+                    
+                    units.push(unit);
+                }
+            });
+        } catch (error) {
+            console.error('Error extracting units:', error);
+        }
+        
+        return units;
     }
 
     // Clear cache for a specific tester

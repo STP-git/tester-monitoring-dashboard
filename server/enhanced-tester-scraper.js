@@ -1,12 +1,14 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const pythonScraper = require('./python-scraper-wrapper');
+const pythonStyleScraper = require('./python-style-scraper');
 
 class EnhancedTesterScraper {
     constructor() {
         this.cache = new Map();
         this.cacheTimeout = 30000; // 30 seconds
         this.usePythonFallback = false; // Set to true to use Python as fallback
+        this.usePythonStyle = true; // Use the new Python-style scraper by default
     }
 
     async scrapeTesterData(testerConfig) {
@@ -21,25 +23,36 @@ class EnhancedTesterScraper {
         try {
             let data;
             
-            // Try JavaScript scraper first
-            try {
-                data = await this.scrapeWithJavaScript(testerConfig);
-                console.log(`[JS Scraper] Successfully scraped ${testerConfig.name} with JavaScript`);
-            } catch (jsError) {
-                console.error(`[JS Scraper] JavaScript scraping failed for ${testerConfig.name}:`, jsError.message);
-                
-                // If Python fallback is enabled, try Python scraper
-                if (this.usePythonFallback) {
-                    console.log(`[JS Scraper] Falling back to Python scraper for ${testerConfig.name}`);
-                    try {
-                        data = await pythonScraper.scrapeTesterData(testerConfig);
-                        console.log(`[JS Scraper] Python fallback succeeded for ${testerConfig.name}`);
-                    } catch (pythonError) {
-                        console.error(`[JS Scraper] Python fallback also failed for ${testerConfig.name}:`, pythonError.message);
-                        throw new Error(`Both JavaScript and Python scrapers failed. JS: ${jsError.message}, Python: ${pythonError.message}`);
+            // Use Python-style scraper by default
+            if (this.usePythonStyle) {
+                try {
+                    data = await pythonStyleScraper.scrapeTesterData(testerConfig);
+                    console.log(`[Python-Style Scraper] Successfully scraped ${testerConfig.name}`);
+                } catch (error) {
+                    console.error(`[Python-Style Scraper] Failed for ${testerConfig.name}:`, error.message);
+                    throw error;
+                }
+            } else {
+                // Try original JavaScript scraper first
+                try {
+                    data = await this.scrapeWithJavaScript(testerConfig);
+                    console.log(`[JS Scraper] Successfully scraped ${testerConfig.name} with JavaScript`);
+                } catch (jsError) {
+                    console.error(`[JS Scraper] JavaScript scraping failed for ${testerConfig.name}:`, jsError.message);
+                    
+                    // If Python fallback is enabled, try Python scraper
+                    if (this.usePythonFallback) {
+                        console.log(`[JS Scraper] Falling back to Python scraper for ${testerConfig.name}`);
+                        try {
+                            data = await pythonScraper.scrapeTesterData(testerConfig);
+                            console.log(`[JS Scraper] Python fallback succeeded for ${testerConfig.name}`);
+                        } catch (pythonError) {
+                            console.error(`[JS Scraper] Python fallback also failed for ${testerConfig.name}:`, pythonError.message);
+                            throw new Error(`Both JavaScript and Python scrapers failed. JS: ${jsError.message}, Python: ${pythonError.message}`);
+                        }
+                    } else {
+                        throw jsError;
                     }
-                } else {
-                    throw jsError;
                 }
             }
 
@@ -102,6 +115,12 @@ class EnhancedTesterScraper {
     setPythonFallback(enabled) {
         this.usePythonFallback = enabled;
         console.log(`[Scraper] Python fallback ${enabled ? 'enabled' : 'disabled'}`);
+    }
+    
+    // Method to toggle Python-style scraper
+    setPythonStyle(enabled) {
+        this.usePythonStyle = enabled;
+        console.log(`[Scraper] Python-style scraper ${enabled ? 'enabled' : 'disabled'}`);
     }
 
     extractPageData($) {

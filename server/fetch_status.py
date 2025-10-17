@@ -104,6 +104,8 @@ def extract_slot_data(slot, station_name, url):
     
     # Extract serial number from the first panel-body
     serial_number = "N/A"
+    
+    # Look specifically in the first panel-body for the main serial number
     panel_body = slot.find("div", class_="panel-body")
     if panel_body:
         sn_tag = panel_body.find("span", class_="slot-sn")
@@ -113,19 +115,27 @@ def extract_slot_data(slot, station_name, url):
                 sn_text = link.text.strip()
                 # Debug logging for serial number extraction
                 if sn_text:
-                    print(f"---  Found potential SN: '{sn_text}' (length: {len(sn_text)})")
+                    print(f"---  Found potential SN in first panel-body: '{sn_text}' (length: {len(sn_text)})")
                 # Check if it looks like a serial number
                 # Serial numbers can be alphanumeric and typically 10+ characters
                 # Examples: C8210F2B03254214T9560, 332404254207412
                 if sn_text and len(sn_text) >= 10:
                     # Exclude slot names like SLOT01, SLOT01_01 and chamber names
-                    if not (sn_text.startswith('SLOT') or sn_text.startswith('CHAMBER')):
+                    if not (sn_text.startswith('SLOT') or
+                           sn_text.startswith('CHAMBER') or
+                           (sn_text.isupper() and sn_text.replace('_', '').replace('-', '').isalnum() and len(sn_text) <= 6)):
                         serial_number = sn_text
                         print(f"---  Accepted SN: '{serial_number}' for slot {slot_name}")
                     else:
                         print(f"---  Rejected SN (slot name pattern): '{sn_text}'")
                 else:
                     print(f"---  Rejected SN (too short): '{sn_text}'")
+            else:
+                print(f"---  No SN link found in first panel-body for slot {slot_name}")
+        else:
+            print(f"---  No SN tag found in first panel-body for slot {slot_name}")
+    else:
+        print(f"---  No panel-body found for slot {slot_name}")
     
     # Extract sub-slots
     sub_slots = []

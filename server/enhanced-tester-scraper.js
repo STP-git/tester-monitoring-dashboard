@@ -257,29 +257,34 @@ class EnhancedTesterScraper {
                 
                 // Extract serial number from the first panel-body
                 let serialNumber = 'N/A';
-                $slot.find('.panel-body').first().find('.slot-sn a').each((i, el) => {
-                    const sn = $(el).text().trim();
-                    // Debug logging for serial number extraction
-                    if (sn) {
-                        console.log(`[Scraper] Found potential SN: "${sn}" (length: ${sn.length})`);
-                    }
+                
+                // Look specifically in the first panel-body for the main serial number
+                const firstPanelBody = $slot.find('.panel-body').first();
+                const snLink = firstPanelBody.find('.slot-sn a').first();
+                
+                if (snLink.length > 0) {
+                    const sn = snLink.text().trim();
+                    console.log(`[Scraper] Found potential SN in first panel-body: "${sn}" (length: ${sn.length})`);
+                    
                     // Check if it looks like a serial number
                     // Serial numbers can be alphanumeric and typically 10+ characters
                     // Examples: C8210F2B03254214T9560, 332404254207412
                     if (sn && sn.length >= 10) {
                         // Exclude slot names like SLOT01, SLOT01_01 and chamber names
                         if (!sn.match(/^SLOT\d+(_\d+)?$/) &&
-                            !sn.match(/^CHAMBER\d+$/)) {
+                            !sn.match(/^CHAMBER\d+$/) &&
+                            !sn.match(/^[A-Z]+\d+$/)) { // Also exclude patterns like SFT
                             serialNumber = sn;
                             console.log(`[Scraper] Accepted SN: "${serialNumber}" for slot ${slotName}`);
-                            return false; // break the loop
                         } else {
                             console.log(`[Scraper] Rejected SN (slot name pattern): "${sn}"`);
                         }
                     } else {
                         console.log(`[Scraper] Rejected SN (too short): "${sn}"`);
                     }
-                });
+                } else {
+                    console.log(`[Scraper] No SN link found in first panel-body for slot ${slotName}`);
+                }
                 
                 // Extract sub-slots (improved)
                 const subSlots = [];

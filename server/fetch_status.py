@@ -111,12 +111,21 @@ def extract_slot_data(slot, station_name, url):
             link = sn_tag.find('a')
             if link:
                 sn_text = link.text.strip()
-                # Check if it looks like a serial number (numeric and longer than 6 digits)
-                # Also handle serial numbers that might contain letters
-                if sn_text and (len(sn_text) >= 7 or (len(sn_text) >= 6 and any(c.isdigit() for c in sn_text))):
-                    # Exclude slot names like SLOT01, SLOT01_01
-                    if not sn_text.startswith('SLOT'):
+                # Debug logging for serial number extraction
+                if sn_text:
+                    print(f"---  Found potential SN: '{sn_text}' (length: {len(sn_text)})")
+                # Check if it looks like a serial number
+                # Serial numbers can be alphanumeric and typically 10+ characters
+                # Examples: C8210F2B03254214T9560, 332404254207412
+                if sn_text and len(sn_text) >= 10:
+                    # Exclude slot names like SLOT01, SLOT01_01 and chamber names
+                    if not (sn_text.startswith('SLOT') or sn_text.startswith('CHAMBER')):
                         serial_number = sn_text
+                        print(f"---  Accepted SN: '{serial_number}' for slot {slot_name}")
+                    else:
+                        print(f"---  Rejected SN (slot name pattern): '{sn_text}'")
+                else:
+                    print(f"---  Rejected SN (too short): '{sn_text}'")
     
     # Extract sub-slots
     sub_slots = []

@@ -259,14 +259,25 @@ class EnhancedTesterScraper {
                 let serialNumber = 'N/A';
                 $slot.find('.panel-body').first().find('.slot-sn a').each((i, el) => {
                     const sn = $(el).text().trim();
-                    // Check if it looks like a serial number (numeric and longer than 6 digits)
-                    // Also handle serial numbers that might contain letters
-                    if (sn && (sn.length >= 7 || (sn.length >= 6 && /\d/.test(sn)))) {
-                        // Exclude slot names like SLOT01, SLOT01_01
-                        if (!sn.match(/^SLOT\d+(_\d+)?$/)) {
+                    // Debug logging for serial number extraction
+                    if (sn) {
+                        console.log(`[Scraper] Found potential SN: "${sn}" (length: ${sn.length})`);
+                    }
+                    // Check if it looks like a serial number
+                    // Serial numbers can be alphanumeric and typically 10+ characters
+                    // Examples: C8210F2B03254214T9560, 332404254207412
+                    if (sn && sn.length >= 10) {
+                        // Exclude slot names like SLOT01, SLOT01_01 and chamber names
+                        if (!sn.match(/^SLOT\d+(_\d+)?$/) &&
+                            !sn.match(/^CHAMBER\d+$/)) {
                             serialNumber = sn;
+                            console.log(`[Scraper] Accepted SN: "${serialNumber}" for slot ${slotName}`);
                             return false; // break the loop
+                        } else {
+                            console.log(`[Scraper] Rejected SN (slot name pattern): "${sn}"`);
                         }
+                    } else {
+                        console.log(`[Scraper] Rejected SN (too short): "${sn}"`);
                     }
                 });
                 
